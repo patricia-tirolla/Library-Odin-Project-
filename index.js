@@ -132,5 +132,3 @@ submitForm.addEventListener("submit", (e) => {
     // the .reset() method clears the form when I click "submit"
     submitForm.reset()
 })
-
-// Read read
