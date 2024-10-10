@@ -30,41 +30,43 @@ function Book(title, author, pages) {
 // Display the books in a table
 function createTable() {
 
-    // Create table heading strings
-    let tableHTML =  `<table border="1">
-                        <theader>
-                            <tr>
-                                <th>title</th>
-                                <th>author</th>
-                                <th>pages</th>
-                            </tr>
-                        </theader>
-                        <tbody>`;
-
     // Select each book in the list and create a new column
-    myLibrary.forEach((book) => {
-
-        // Concatenate the strings to add the columns
-        tableHTML += `<tr>
-        <td>${book.title}</td>
-        <td>${book.author}</td>
-        <td>${book.pages}</td>
-        </tr>`;
-    });            
-
-    // Concatenate the closing tags strings
-    tableHTML += `</tbody></table>`;
-
-    // Add the table strings to the display in HTML
     let display = document.getElementById("display");
-    display.innerHTML = tableHTML
+    myLibrary.forEach((book, index) => {
+
+        let tableRow = document.createElement("tr");
+        tableRow.setAttribute("data-index", index);
+        display.appendChild(tableRow);
+
+        let tableColumn1 = document.createElement("td");
+        let tableColumn2 = document.createElement("td");
+        let tableColumn3 = document.createElement("td");
+        
+        tableRow.appendChild(tableColumn1);
+        tableRow.appendChild(tableColumn2);
+        tableRow.appendChild(tableColumn3);
+
+        tableColumn1.textContent = book.title;
+        tableColumn2.textContent = book.author;
+        tableColumn3.textContent = book.pages;
+
+        const removeButton = document.createElement("button");
+        removeButton.classList.add("remove-button")
+        removeButton.textContent = ("Delete");
+        tableRow.appendChild(removeButton);
+
+        removeButton.addEventListener("click", () => {
+            tableRow.remove();
+        })
+
+        
+    });            
 }
+
 
 // connect form buttons 
 const openNewBookButton = document.querySelector("#new-book-button");
 const cancelButton = document.getElementById("cancel-button");
-const modal = document.querySelector("#modal");
-const submitForm = document.querySelector("#registration-form");
 
 openNewBookButton.addEventListener("click", () => {
     modal.show();
@@ -74,6 +76,10 @@ cancelButton.addEventListener("click", () => {
     submitForm.reset();
     modal.close();
 })
+
+// Actions when submitting the form
+const modal = document.querySelector("#modal");
+const submitForm = document.querySelector("#registration-form");
 
 submitForm.addEventListener("submit", (e) => {
 
