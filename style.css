@@ -5,3 +5,13 @@ dialog {
     border: none;
     border-radius: 1rem;
   }
+
+  dialog::backdrop {
+    background-color: rgb(0, 136, 255);
+  }
+
+  #display {
+    width: 300px;
+    height: 30px;
+    background-color: red;
+  }

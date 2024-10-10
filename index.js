@@ -1,16 +1,7 @@
+// Library list
 const myLibrary = [];
 
-// // Add book to library
-// function addBookToLibrary() {
-//     let newBookTitle = prompt("Add the book title");
-//     let newBookAuthor = prompt("Add the author");
-//     let newBookPage = prompt("Add the number of pages");
-//     const book = new Book(newBookTitle, newBookAuthor, newBookPage);
-
-//     myLibrary.push(book);
-//     return myLibrary;
-// }
-
+// Add book to the library
 function addBookToLibrary() {
     let bookTitle = document.getElementById("book-title");
     let bookTitleValue = bookTitle.value;
@@ -26,13 +17,6 @@ function addBookToLibrary() {
     myLibrary.push(book);
 }
 
-
-// Display each book on the page
-function displayEachBook() {
-    myLibrary.forEach((element) => console.log(element));
-}
-displayEachBook();
-
 // The constructor
 function Book(title, author, pages) {
     this.title = title;
@@ -43,25 +27,63 @@ function Book(title, author, pages) {
     }
 }
 
+// Display the books in a table
+function createTable() {
 
-// connect form buttons
-const openAddNewBookButton = document.querySelector("[data-open-modal]");
-const closeButton = document.querySelector("[data-close-modal]");
-const modal = document.querySelector("[data-modal]");
-const submitForm = document.querySelector("#library-book-registration")
+    // Create table heading strings
+    let tableHTML =  `<table border="1">
+                        <theader>
+                            <tr>
+                                <th>title</th>
+                                <th>author</th>
+                                <th>pages</th>
+                            </tr>
+                        </theader>
+                        <tbody>`;
 
-openAddNewBookButton.addEventListener("click", () => {
+    // Select each book in the list and create a new column
+    myLibrary.forEach((book) => {
+
+        // Concatenate the strings to add the columns
+        tableHTML += `<tr>
+        <td>${book.title}</td>
+        <td>${book.author}</td>
+        <td>${book.pages}</td>
+        </tr>`;
+    });            
+
+    // Concatenate the closing tags strings
+    tableHTML += `</tbody></table>`;
+
+    // Add the table strings to the display in HTML
+    let display = document.getElementById("display");
+    display.innerHTML = tableHTML
+}
+
+// connect form buttons 
+const openNewBookButton = document.querySelector("#new-book-button");
+const cancelButton = document.getElementById("cancel-button");
+const modal = document.querySelector("#modal");
+const submitForm = document.querySelector("#registration-form");
+
+openNewBookButton.addEventListener("click", () => {
     modal.show();
 })
 
-// closeButton.addEventListener("click", () => {
-//     modal.close()
-// })
+cancelButton.addEventListener("click", () => {
+    submitForm.reset();
+    modal.close();
+})
 
 submitForm.addEventListener("submit", (e) => {
+
+    // the preventDefaut() method prevents submiting the form on a server
     e.preventDefault();
+
     addBookToLibrary();
+    createTable();
     modal.close();
 
+    // the .reset() method clears the form when I click "submit"
+    submitForm.reset()
 })
-console.log(myLibrary);
