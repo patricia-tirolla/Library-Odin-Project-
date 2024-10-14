@@ -1,50 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css"></link>
-    <script src="index.js" defer></script>
+    <script src="main.js" defer></script>
 </head>
+
 <body>
-    <button id="new-book-button">NEW BOOK</button>
-
-    <!-- Form dialog -->
+    <button id="add-book-button">NEW BUTTON</button>
     <dialog id="modal">
-        <form id="registration-form">
+        <form id="new-book-form">
+            <!-- <fieldset>
+                <legend>Add a new book</legend> -->
 
-            <label for="book-title">Book title</label>
-            <input type="text" id="book-title" name="title">
+                <label for="book-title">Book title</label>
+                <input type="text" id="book-title" name="title">
 
-            <label for="author">Author</label>
-            <input type="text" id="author" name="author">
+                <label for="author">Author</label>
+                <input type="text" id="author" name="author">
 
-            <label for="pages">Pages</label>
-            <input type="number" id="pages" name="pages">
+                <label for="pages">Pages</label>
+                <input type="number" id="pages" name="pages">
 
-            <button type="button" id="cancel-button" formmethod="dialog" >Cancel</button>
-            <button type="submit" id="submit-button" >Submit</button>
+                <button type="button" id="cancel-button" formmethod="dialog">Cancel</button>
+                <button type="submit" id="submit-button">Submit</button>
+            <!-- </fieldset> -->
         </form>
     </dialog>
 
-    <div>
-        <table border="1">
-            <caption>Your books</caption>
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>Pages</th>
-                    <th>Read</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody id="display">
-
-            <!-- This is where the table is going to display -->
-            </tbody>
-        </table>
-    </div>
+    <table border="1">
+        <caption>Your books</caption>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Pages</th>
+                <th>Read</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody id="display-row">
+            <!-- The rows go here -->
+        </tbody>
+    </table>
+    <template id="template">
+        <tr class="book-row" data-index="index">
+            <td class="book-title"></td>
+            <td class="book-author"></td>
+            <td class="book-pages"></td>
+            <td><input class="read-checkbox" name="read-status" type="checkbox">
+            <label>Read</label></td>
+            <td><button class="delete-button">DELETE</button></td>
+        </tr>
+        
+    </template>
 </body>
+
 </html>
